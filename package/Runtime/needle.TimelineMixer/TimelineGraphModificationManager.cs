@@ -34,7 +34,9 @@ namespace needle.TimelineMixer
             var mixersChanged = DetectMixersChanged();
             if (mixersChanged)
             {
+                var time = Director.time;
                 Director.RebuildGraph();
+                Director.time = time;
                 UpdateIdIfChanged();
             }
             else if (!DetectGraphChanged()) return;
@@ -66,17 +68,19 @@ namespace needle.TimelineMixer
         {
             if (injectedMixers.Count <= 0) return;
             injectedMixers.Clear();
+            var time = Director.time;
             Director.RebuildGraph();
+            Director.time = time;
         }
 
         private void Update()
         {
-            if (!Director.playableGraph.IsValid()) return;
+            if (!Director || !Director.playableGraph.IsValid()) return;
 
+            Inject();
+            
             if (!Application.isPlaying)
             {
-                Inject();
-
                 var validated = false;
                 foreach (var mixer in Mixer)
                 {

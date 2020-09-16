@@ -19,7 +19,16 @@ namespace needle.TimelineMixer
 
         private AnimationClipPlayable playable;
         private int index;
-        
+
+        private AnimationClip prevClip;
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            RequestGraphRebuild = prevClip != Clip;
+            prevClip = Clip;
+        }
+
         // this is just here for the toggle
         // ReSharper disable once Unity.RedundantEventFunction
         private void OnEnable()
