@@ -236,7 +236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7eb8b94e211f70f44877f2fbe52f2e78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2343792
+      value: 0.24935427
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7eb8b94e211f70f44877f2fbe52f2e78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 700842116}
   Clip: {fileID: 7400000, guid: e9b50f078b62d8e449242b537084fdd2, type: 2}
-  Weight01: 0.2
+  Weight01: 0.482
   Additive: 1
   proceedTimeInEditMode: 1
 --- !u!1 &1321438039

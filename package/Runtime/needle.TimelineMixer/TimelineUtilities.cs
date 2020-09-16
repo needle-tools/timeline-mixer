@@ -10,6 +10,13 @@ namespace needle.TimelineMixer
 {
     public static class TimelineUtilities
     {
+        public static AnimationClipPlayable AddClip(this AnimationLayerMixerPlayable layerMixer, PlayableGraph graph, AnimationClip clip,  out int index)
+        {
+            var playable = AnimationClipPlayable.Create(graph, clip);
+            index = layerMixer.AddInput(playable, 0);
+            return playable;
+        }
+        
         public static bool TryInjectMixer(this PlayableDirector dir, Playable timelinePlayable, Animator animator,
             out AnimationLayerMixerPlayable mixerPlayable)
         {

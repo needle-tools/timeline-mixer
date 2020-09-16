@@ -20,5 +20,11 @@ namespace needle.TimelineMixer
         {
             DidValidate = true;
         }
+
+        // ReSharper disable once Unity.RedundantEventFunction
+        protected virtual void OnEnable()
+        {
+            // this is just here for the enabled toggle
+        }
     }
 }

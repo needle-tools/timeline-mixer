@@ -29,16 +29,9 @@ namespace needle.TimelineMixer
             prevClip = Clip;
         }
 
-        // this is just here for the toggle
-        // ReSharper disable once Unity.RedundantEventFunction
-        private void OnEnable()
-        {
-        }
-
         public override void OnConnected(PlayableGraph graph, AnimationLayerMixerPlayable mixer)
         {
-            playable = AnimationClipPlayable.Create(graph, Clip);
-            index = mixer.AddInput(playable, 0);
+            playable = mixer.AddClip(graph, Clip, out index);
         }
 
         public override void OnUpdate(TimelineGraphModificationManager manager, AnimationLayerMixerPlayable mixer)
