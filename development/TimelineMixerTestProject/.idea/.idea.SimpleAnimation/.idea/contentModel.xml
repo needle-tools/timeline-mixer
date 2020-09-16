@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\git\SimpleAnimation" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="MyTest" t="Include">
+          <e p="MySimpleAnimatorMixer.cs" t="Include" />
+          <e p="MySimplePlayableClip.cs" t="Include" />
+        </e>
+        <e p="SimpleAnimationComponent" t="Include">
+          <e p="CustomPlayableExtensions.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="SimpleAnimationComponent-Editor.asmdef" t="Include" />
+            <e p="SimpleAnimationEditor.cs" t="Include" />
+          </e>
+          <e p="SimpleAnimation.cs" t="Include" />
+          <e p="SimpleAnimation_impl.cs" t="Include" />
+          <e p="SimpleAnimationComponent.asmdef" t="Include" />
+          <e p="SimpleAnimationPlayable.cs" t="Include" />
+          <e p="SimpleAnimationPlayable_States.cs" t="Include" />
+          <e p="Tests" t="Include">
+            <e p="AnimationProxy.cs" t="Include" />
+            <e p="IAnimation.cs" t="Include" />
+            <e p="PerformanceTests" t="Include">
+              <e p="ComplexWithTransition" t="Include">
+                <e p="SimpleAnimationTransitions.cs" t="Include" />
+              </e>
+              <e p="TestUI.cs" t="Include" />
+            </e>
+            <e p="PlaymodeTests" t="Include">
+              <e p="ComparativeTests" t="Include">
+                <e p="BaseConditionsTests.cs" t="Include" />
+                <e p="ClipManagementTests.cs" t="Include" />
+                <e p="ComparativeTestFixture.cs" t="Include" />
+                <e p="DifferencesTests.cs" t="Include" />
+                <e p="MiscTests.cs" t="Include" />
+                <e p="PlaybackTests.cs" t="Include" />
+                <e p="QueueTests.cs" t="Include" />
+                <e p="StateAccessTests.cs" t="Include" />
+              </e>
+              <e p="SimpleAnimationTests.cs" t="Include" />
+            </e>
+            <e p="SimpleAnimation-Tests.asmdef" t="Include" />
+            <e p="SimpleAnimationProxy.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="SimpleAnimation-Tests.csproj" t="IncludeRecursive" />
+      <e p="SimpleAnimation.sln" t="IncludeFlat" />
+      <e p="SimpleAnimationComponent-Editor.csproj" t="IncludeRecursive" />
+      <e p="SimpleAnimationComponent.csproj" t="IncludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\marcel\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\marcel\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_SimpleAnimation.-1317871309.00" t="ExcludeRecursive" />
+  </component>
+</project>

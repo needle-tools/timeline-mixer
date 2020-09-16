@@ -1,0 +1,12 @@
+{
+  "name": "com.needle.animation.timelinemixer",
+  "displayName": "Timeline Mixer",
+  "version": "0.0.1-preview",
+  "unity": "2019.4",
+  "description": "",
+  "keywords": [
+  ],
+  "dependencies": {
+    "com.unity.timeline": "1.4.2"
+  }
+}
