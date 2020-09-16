@@ -47,7 +47,7 @@ namespace needle.TimelineMixer
             }
 
             var tracks = new List<TrackAsset>();
-            if (!TryGetAnimationTracks(dir, tracks))
+            if (!TryGetTracks(dir, tracks))
             {
                 Debug.LogError("No AnimationTracks found", dir);
                 return false;
@@ -82,7 +82,7 @@ namespace needle.TimelineMixer
                 return false;
             }
 
-            // Debug.Log("found: " + animatorIndex);
+            Debug.Log("found: " + animatorIndex);
 
             var playable = timelinePlayable.GetInput(animatorIndex);
             var prevOutput = playable.GetOutput(0);
@@ -97,7 +97,7 @@ namespace needle.TimelineMixer
             return mixerPlayable.IsValid();
         }
 
-        public static bool TryGetAnimationTracks(PlayableDirector dir, List<TrackAsset> tracksCache)
+        public static bool TryGetTracks(PlayableDirector dir, List<TrackAsset> tracksCache)
         {
             if (!dir)
             {
@@ -108,10 +108,10 @@ namespace needle.TimelineMixer
             if (dir.playableAsset && dir.playableAsset is TimelineAsset timelineAsset)
             {
                 var outputTracks = timelineAsset.GetOutputTracks();
-                var tracks = outputTracks
-                    .Where(x => x is AnimationTrack)
-                    .Cast<AnimationTrack>();
-                tracksCache.AddRange(tracks);
+                // var tracks = outputTracks
+                //     .Where(x => x is AnimationTrack)
+                //     .Cast<AnimationTrack>();
+                tracksCache.AddRange(outputTracks);
                 return true;
             }
 
