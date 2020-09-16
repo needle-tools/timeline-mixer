@@ -4486,6 +4486,20 @@ PlayableDirector:
   m_ExposedReferences:
     m_References:
     - 549ff27c9abfcc547a0cdc016bb9274e: {fileID: 647876976}
+--- !u!114 &700842118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700842115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f17646ed164596a86208696eda9010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Director: {fileID: 700842117}
+  Mixer: []
 --- !u!114 &700842119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9286,7 +9300,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522956081}
-  - component: {fileID: 1522956080}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -9294,20 +9307,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1522956080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522956079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f17646ed164596a86208696eda9010, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Director: {fileID: 700842117}
-  Test: 0
 --- !u!4 &1522956081
 Transform:
   m_ObjectHideFlags: 0
