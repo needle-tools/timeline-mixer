@@ -91,6 +91,7 @@ namespace needle.TimelineMixer
                 var validated = false;
                 foreach (var mixer in Mixer)
                 {
+                    if (!mixer) continue;
                     validated |= mixer.DidValidate;
                     mixer.DidValidate = false;
                 }
@@ -163,7 +164,7 @@ namespace needle.TimelineMixer
             {
                 previousMixers.Add(mix);
                 previousAnimators.Add(mix ? mix.Animator : null);
-                previousStates.Add(mix.enabled);
+                previousStates.Add(mix && mix.enabled);
             }
 
             return true;
