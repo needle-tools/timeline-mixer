@@ -12,6 +12,8 @@ namespace needle.TimelineMixer
     {
         [SerializeField] private PlayableDirector Director;
 
+        public bool AutoCollectMixerAtStart = true;
+
         [SerializeField] private List<TimelineAnimationMixer> Mixer = default;
 
         public void Add(TimelineAnimationMixer mixer)
@@ -57,6 +59,11 @@ namespace needle.TimelineMixer
         {
             if (!Director) Director = GetComponent<PlayableDirector>();
             Inject();
+        }
+
+        private void Start()
+        {
+            if(AutoCollectMixerAtStart) FindMixerInHierarchy();
         }
 
         private void OnEnable()
@@ -124,6 +131,7 @@ namespace needle.TimelineMixer
 
         private bool DetectMixersChanged()
         {
+            if(Mixer == null) Mixer = new List<TimelineAnimationMixer>();
             var mixersChanged = Mixer.Count != previousMixers.Count;
             for (var i = 0; i < Mixer.Count && i < previousMixers.Count; i++)
             {
@@ -200,6 +208,13 @@ namespace needle.TimelineMixer
         {
             if (Director)
                 Director.RebuildGraph();
+        }
+
+        [ContextMenu(nameof(FindMixerInHierarchy))]
+        private void FindMixerInHierarchy()
+        {
+            var mixers = GetComponentsInChildren<TimelineAnimationMixer>(true);
+            foreach (var mix in mixers) this.Add(mix);
         }
     }
 }
