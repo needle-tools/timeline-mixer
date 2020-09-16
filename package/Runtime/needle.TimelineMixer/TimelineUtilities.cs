@@ -10,34 +10,16 @@ namespace needle.TimelineMixer
 {
     public static class TimelineUtilities
     {
-        public static bool TryInjectMixer(this PlayableDirector dir, Animator animator, out AnimationLayerMixerPlayable mixerPlayable)
-        {
-            mixerPlayable = AnimationLayerMixerPlayable.Null;
-            if (!dir)
-            {
-                Debug.LogError("PlayableDirector is null");
-                return false;
-            }
-
-            if (!animator)
-            {
-                Debug.LogError("Animator is null");
-                return false;
-            }
-
-            if (TryFindTimelinePlayable(dir.playableGraph, out var timelinePlayable))
-            {
-                return dir.TryInjectMixer(timelinePlayable, animator, out mixerPlayable);
-            }
-
-            mixerPlayable = AnimationLayerMixerPlayable.Null;
-            return false;
-        }
-
         public static bool TryInjectMixer(this PlayableDirector dir, Playable timelinePlayable, Animator animator,
             out AnimationLayerMixerPlayable mixerPlayable)
         {
             mixerPlayable = AnimationLayerMixerPlayable.Null;
+
+            if (timelinePlayable.IsValid() == false)
+            {
+                Debug.LogError("Timeline Playable is not valid");
+                return false;
+            }
 
             if (!dir)
             {

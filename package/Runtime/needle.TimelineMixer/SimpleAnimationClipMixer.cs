@@ -19,7 +19,9 @@ namespace needle.TimelineMixer
 
         private AnimationClipPlayable playable;
         private int index;
-
+        
+        // this is just here for the toggle
+        // ReSharper disable once Unity.RedundantEventFunction
         private void OnEnable()
         {
         }
