@@ -12,7 +12,7 @@ namespace needle.TimelineMixer
 
         
         public abstract void OnConnected(PlayableGraph graph, AnimationLayerMixerPlayable mixer);
-        public abstract void OnUpdate(AnimationLayerMixerPlayable mixer);
+        public abstract void OnUpdate(TimelineGraphModificationManager manager, AnimationLayerMixerPlayable mixer);
 
         public bool DidValidate { get; set; }
         

@@ -10,8 +10,7 @@ namespace needle.TimelineMixer
     [ExecuteInEditMode]
     public class TimelineGraphModificationManager : MonoBehaviour
     {
-        [SerializeField]
-        private PlayableDirector Director;
+        [SerializeField] private PlayableDirector Director;
 
         [SerializeField] private List<TimelineAnimationMixer> Mixer = default;
 
@@ -28,10 +27,9 @@ namespace needle.TimelineMixer
             if (!Mixer.Contains(mixer)) return;
             Mixer.Remove(mixer);
         }
-        
+
         public void Inject()
         {
-            Debug.Log("DETECT");
             if (!Director || !Director.playableGraph.IsValid()) return;
             var mixersChanged = DetectMixersChanged();
             if (mixersChanged)
@@ -40,6 +38,7 @@ namespace needle.TimelineMixer
                 UpdateIdIfChanged();
             }
             else if (!DetectGraphChanged()) return;
+
             InternalInjectNow();
         }
 
@@ -47,9 +46,10 @@ namespace needle.TimelineMixer
         private readonly List<TimelineAnimationMixer> previousMixers = new List<TimelineAnimationMixer>();
         private readonly List<Animator> previousAnimators = new List<Animator>();
         private readonly List<bool> previousStates = new List<bool>();
-        
-        private readonly List<(TimelineAnimationMixer handler, AnimationLayerMixerPlayable playable)> injectedMixers = new List<(TimelineAnimationMixer, AnimationLayerMixerPlayable)>();
-        
+
+        private readonly List<(TimelineAnimationMixer handler, AnimationLayerMixerPlayable playable)> injectedMixers =
+            new List<(TimelineAnimationMixer, AnimationLayerMixerPlayable)>();
+
 
         protected virtual void OnValidate()
         {
@@ -57,10 +57,22 @@ namespace needle.TimelineMixer
             Inject();
         }
 
+        private void OnEnable()
+        {
+            Inject();
+        }
+
+        private void OnDisable()
+        {
+            if (injectedMixers.Count <= 0) return;
+            injectedMixers.Clear();
+            Director.RebuildGraph();
+        }
+
         private void Update()
         {
             if (!Director.playableGraph.IsValid()) return;
-            
+
             if (!Application.isPlaying)
             {
                 Inject();
@@ -74,14 +86,14 @@ namespace needle.TimelineMixer
 
                 if (validated)
                 {
-                    Debug.Log("evaluate");
                     Director.playableGraph.Evaluate(0);
                 }
             }
-            
-            foreach (var entry in injectedMixers)
+
+            for (var index = 0; index < injectedMixers.Count; index++)
             {
-                entry.handler.OnUpdate(entry.playable);
+                var entry = injectedMixers[index];
+                entry.handler.OnUpdate(this, entry.playable);
             }
         }
 
@@ -123,7 +135,7 @@ namespace needle.TimelineMixer
                 else if (current && prev)
                 {
                     var state = previousStates[i];
-                    if(current.Animator != prev.Animator)
+                    if (current.Animator != prev.Animator)
                         mixersChanged = true;
                     else if (current.enabled != state)
                         mixersChanged = true;
@@ -147,13 +159,14 @@ namespace needle.TimelineMixer
 
         private void InternalInjectNow()
         {
+            if (!enabled) return;
+
             if (!TimelineUtilities.TryFindTimelinePlayable(Director.playableGraph, out var timelinePlayable))
             {
                 Debug.LogError("Failed finding timeline playable", this);
                 return;
             }
 
-            Debug.Log("Injecting now");
 
             injectedMixers.Clear();
             for (var index = 0; index < Mixer.Count; index++)
@@ -165,7 +178,6 @@ namespace needle.TimelineMixer
                     continue;
                 if (Director.TryInjectMixer(timelinePlayable, animator, out var mixerPlayable))
                 {
-                    Debug.Log("injected Mixer");
                     injectedMixers.Add((mixer, mixerPlayable));
                     try
                     {
@@ -177,6 +189,13 @@ namespace needle.TimelineMixer
                     }
                 }
             }
+        }
+
+        [ContextMenu(nameof(RequestRebuildGraph))]
+        private void RequestRebuildGraph()
+        {
+            if (Director)
+                Director.RebuildGraph();
         }
     }
 }

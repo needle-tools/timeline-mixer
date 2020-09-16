@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
@@ -17,32 +18,39 @@ namespace needle.TimelineMixer
                 Debug.LogError("PlayableDirector is null");
                 return false;
             }
+
             if (!animator)
             {
                 Debug.LogError("Animator is null");
                 return false;
             }
+
             if (TryFindTimelinePlayable(dir.playableGraph, out var timelinePlayable))
             {
                 return dir.TryInjectMixer(timelinePlayable, animator, out mixerPlayable);
             }
+
             mixerPlayable = AnimationLayerMixerPlayable.Null;
             return false;
         }
-        
-        public static bool TryInjectMixer(this PlayableDirector dir, Playable timelinePlayable, Animator animator, out AnimationLayerMixerPlayable mixerPlayable)
+
+        public static bool TryInjectMixer(this PlayableDirector dir, Playable timelinePlayable, Animator animator,
+            out AnimationLayerMixerPlayable mixerPlayable)
         {
             mixerPlayable = AnimationLayerMixerPlayable.Null;
+
             if (!dir)
             {
                 Debug.LogError("PlayableDirector is null");
                 return false;
             }
+
             if (!dir.playableAsset)
             {
                 Debug.LogError("PlayableDirector has no TimelineAsset assigned", dir);
                 return false;
             }
+
             if (!animator)
             {
                 Debug.LogError("Animator is null");
@@ -56,46 +64,46 @@ namespace needle.TimelineMixer
                 return false;
             }
 
-            Debug.Log(animator.name);
-            var outputs = dir.playableAsset.outputs;
-            int animatorIndex = 0, animatorOutputsIndex = 0;
+            var animatorIndex = 0;
             var found = false;
             // try find the timeline graph index for this animator
             // we do this by looping bindings for all animation tracks
             // and check if the binding maps to the animator we want to inject a mixer for
-            foreach (var output in outputs)
+            foreach (var track in tracks)
             {
-                var binding = dir.GetGenericBinding(output.sourceObject);
-                if (!binding || binding.GetType() != typeof(Animator)) continue;
-                if (binding == animator)
+                if (found) break;
+                if (track.isEmpty || track.muted || !track.hasClips) continue;
+                var trackOutputs = track.outputs;
+                foreach (var to in trackOutputs)
                 {
-                    found = true;
-                    break;
-                }
+                    var trackBinding = dir.GetGenericBinding(to.sourceObject);
+                    if (trackBinding && trackBinding == animator)
+                    {
+                        found = true;
+                        break;
+                    }
 
-                // muted and tracks without animation clips dont show up in the graph, therefore we need to skip these
-                var track = tracks[animatorOutputsIndex];
-                if (track.hasClips && !track.muted)
                     animatorIndex++;
-                animatorOutputsIndex++;
+                }
             }
 
             if (!found)
             {
-                Debug.LogError("Animator " + animator + " is not bound to " + dir, dir);
+                Debug.LogWarning("Animator " + animator + " is not bound to " + dir, dir);
                 return false;
             }
 
             // Debug.Log("found: " + animatorIndex);
 
             var playable = timelinePlayable.GetInput(animatorIndex);
+            var prevOutput = playable.GetOutput(0);
+            var prevInput = prevOutput.GetInput(animatorIndex);
+            // Debug.Log(prevOutput.GetPlayableType() + ", " + prevInput.GetPlayableType());
+            // return false;
             mixerPlayable = AnimationLayerMixerPlayable.Create(dir.playableGraph, 1);
-
-            var o = playable.GetOutput(0);
-            var prevInput = o.GetInput(0);
             // var pWeight = o.GetInputWeight(0);
-            o.DisconnectInput(0);
-            o.ConnectInput(0, mixerPlayable, 0);
+            prevOutput.DisconnectInput(animatorIndex);
+            prevOutput.ConnectInput(animatorIndex, mixerPlayable, 0);
             mixerPlayable.ConnectInput(0, prevInput, 0, 1);
             return mixerPlayable.IsValid();
         }
@@ -107,6 +115,7 @@ namespace needle.TimelineMixer
                 Debug.LogError("PlayableDirector is null");
                 return false;
             }
+
             if (dir.playableAsset && dir.playableAsset is TimelineAsset timelineAsset)
             {
                 var outputTracks = timelineAsset.GetOutputTracks();
@@ -123,13 +132,13 @@ namespace needle.TimelineMixer
         public static bool TryFindTimelinePlayable(PlayableGraph graph, out Playable timelinePlayable)
         {
             timelinePlayable = Playable.Null;
-            
+
             if (!graph.IsValid())
             {
                 Debug.LogError("Cant find TimelinePlayable: PlayableGraph is not valid");
                 return false;
             }
-            
+
             bool TraverseSearchTimelinePlayable(Playable pl, ref Playable timeline)
             {
                 if (timeline.IsValid()) return true;

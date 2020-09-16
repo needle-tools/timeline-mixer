@@ -230,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7eb8b94e211f70f44877f2fbe52f2e78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5439497
+      value: 0.3577888
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7eb8b94e211f70f44877f2fbe52f2e78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -501,7 +501,9 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 3649975331900568115, guid: e923dcb3394929845b380db8141d7324, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -462028115518422087, guid: 0f7393df5881d834ca66dc7de4525775, type: 2}
+  - key: {fileID: 8708069953633374122, guid: 0f7393df5881d834ca66dc7de4525775, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8376063009260632259, guid: 0f7393df5881d834ca66dc7de4525775, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -536,7 +538,7 @@ MonoBehaviour:
   _animator: {fileID: 700842116}
   Clip: {fileID: 7400000, guid: e9b50f078b62d8e449242b537084fdd2, type: 2}
   Weight01: 1
-  Additive: 1
+  Additive: 0
   proceedTimeInEditMode: 1
 --- !u!1 &1321438039
 GameObject:

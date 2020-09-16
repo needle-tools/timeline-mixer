@@ -30,7 +30,7 @@ namespace needle.TimelineMixer
             index = mixer.AddInput(playable, 0);
         }
 
-        public override void OnUpdate(AnimationLayerMixerPlayable mixer)
+        public override void OnUpdate(TimelineGraphModificationManager manager, AnimationLayerMixerPlayable mixer)
         {
             if (!playable.IsValid()) return;
             if (proceedTimeInEditMode && !Application.isPlaying)
