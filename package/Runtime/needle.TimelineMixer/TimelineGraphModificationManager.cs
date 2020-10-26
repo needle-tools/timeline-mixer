@@ -46,6 +46,10 @@ namespace needle.TimelineMixer
             InternalInjectNow();
         }
 
+        private bool requireEvaluate;
+        public void RequireTimelineEvaluate() => requireEvaluate = true;
+        public bool TimelineIsPlaying() => Director && Director.playableGraph.IsValid() && Director.playableGraph.IsPlaying();
+
         private int previousId;
         private readonly List<TimelineAnimationMixer> previousMixers = new List<TimelineAnimationMixer>();
         private readonly List<Animator> previousAnimators = new List<Animator>();
@@ -106,6 +110,12 @@ namespace needle.TimelineMixer
             {
                 var entry = injectedMixers[index];
                 entry.handler.OnUpdate(this, entry.playable);
+            }
+
+            if (requireEvaluate)
+            {
+                requireEvaluate = false;
+                Director.Evaluate();
             }
         }
 
