@@ -6,7 +6,7 @@ Timeline Mixer allows for blending between currently playing (or paused) timelin
 ![](package/Documentation~/video1.gif)
 
 # How To Use 💡
-Please open the <a href="package/Readme.md">Package Readme</a> for more information.
+Please open the <a href="https://github.com/needle-tools/timeline-mixer/blob/master/package/Readme.md">Package Readme</a> for more information.
 
 # In Production ⚙️
 We have used TimelineMixer successfully shipping <a href="https://songsofcultures.com/">**Songs Of Cultures** - an Augmented Reality app for children.</a>
