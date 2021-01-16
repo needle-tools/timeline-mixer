@@ -10,8 +10,14 @@ namespace needle.TimelineMixer
         public abstract Animator Animator { get; }
         public bool RequestGraphRebuild { get; set; }
 
-        
+        /// <summary>
+        /// Called when mixer playable gets injected into timeline playable graph
+        /// </summary>
         public abstract void OnConnected(PlayableGraph graph, AnimationLayerMixerPlayable mixer);
+        
+        /// <summary>
+        /// Called every frame to update weights
+        /// </summary>
         public abstract void OnUpdate(TimelineGraphModificationManager manager, AnimationLayerMixerPlayable mixer);
 
         public bool DidValidate { get; set; }

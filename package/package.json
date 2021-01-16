@@ -1,10 +1,18 @@
 {
   "name": "com.needle.animation.timelinemixer",
   "displayName": "Timeline Mixer",
-  "version": "0.0.1-preview",
+  "version": "1.0.0-preview",
   "unity": "2019.4",
-  "description": "",
+  "description": "Allows overriding timeline animations per animator",
+  "author": {
+    "name": "Needle",
+    "email": "hi@needle.tools",
+    "url": "https://needle.tools"
+  },
   "keywords": [
+    "animation",
+    "timeline",
+    "override"
   ],
   "dependencies": {
     "com.unity.timeline": "1.4.2"
