@@ -10,7 +10,8 @@ Please open the <a href="package/Readme.md">Package Readme</a> for more informat
 
 # In Production ⚙️
 We have used TimelineMixer successfully shipping <a href="https://songsofcultures.com/">**Songs Of Cultures** - an Augmented Reality app for children.</a>
-![](documentation/SongsOfCultures.gif)
+
+![](documentation/SongsOfCultures-runtime.gif)
 
 
 # Contact ✒️
