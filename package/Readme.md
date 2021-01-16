@@ -32,7 +32,7 @@ You can create your own mixer behaviours by implementing a ``TimelineAnimationMi
 ## Playing animation while Timeline is paused
 To play animation while the ``PlayableDirector`` is paused you can call the ``RequireTimelineEvaluate()`` method on ``TimelineGraph Modification Manager`` from the ``OnUpdate`` method of your ``TimelineAnimationMixer``. This will trigger a call to ``Evaluate`` on the ``PlayableDirector`` at the end of the update.
 
-# Contact
+# Contact ✒️
 <b>[needle — tools for unity](https://needle.tools)</b> • 
 [@NeedleTools](https://twitter.com/NeedleTools) • 
 [@marcel_wiessler](https://twitter.com/marcel_wiessler) • 
