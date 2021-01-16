@@ -28,6 +28,10 @@ You can create your own mixer behaviours by implementing a ``TimelineAnimationMi
 
 - ``OnUpdate`` is called every frame with a reference to the injected mixer node and manager. Use it to update the weights on 
 
+
+## Playing animation while Timeline is paused
+To play animation while the ``PlayableDirector`` is paused you can call the ``RequireTimelineEvaluate()`` method on ``TimelineGraph Modification Manager`` from the ``OnUpdate`` method of your ``TimelineAnimationMixer``. This will trigger a call to ``Evaluate`` on the ``PlayableDirector`` at the end of the update.
+
 # Contact
 <b>[needle — tools for unity](https://needle.tools)</b> • 
 [@NeedleTools](https://twitter.com/NeedleTools) • 
