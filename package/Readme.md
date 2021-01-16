@@ -3,22 +3,22 @@
 
 Timeline Mixer allows for blending between currently playing (or paused) timeline animation and other animations per animator.
 
-![](~Documentation/video1.gif)
+![](Documentation~/video1.gif)
 
 
 # Quick Start 🏇🏼
 
 1) <kbd>Add</kbd> a ``TimelineGraph Modification Manager`` component to your scene for every timeline you want to inject into and <kbd>drag</kbd> the ``Timeline Director`` you want to modify in the Director field.
 
-![](~Documentation/ModificationManager.png)
+![](Documentation~/ModificationManager.png)
 
 2) <kbd>Add</kbd> a ``Simple Animation Clip Mixer`` component to your scene and <kbd>reference</kbd> the ``Animator`` component you want to blend animation with.
 
-![](~Documentation/SimpleTimelineMixer.png)
+![](Documentation~/SimpleTimelineMixer.png)
 
 3) <kbd>Add a reference</kbd> to the ``Simple Animation Clip Mixer`` to your ``TimelineGraph Modification Manager`` list of mixers.
 
-![](~Documentation/MixersList.png)
+![](Documentation~/MixersList.png)
 
 # Advanced 💡
 

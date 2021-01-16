@@ -12,6 +12,7 @@ namespace needle.TimelineMixer
         [Range(0, 1)] public float Weight01;
 
         public bool Additive = false;
+        public bool Loop = true;
 
         [SerializeField] private bool proceedTimeInEditMode = true;
 
@@ -37,10 +38,15 @@ namespace needle.TimelineMixer
         public override void OnUpdate(TimelineGraphModificationManager manager, AnimationLayerMixerPlayable mixer)
         {
             if (!playable.IsValid()) return;
+            if (!Clip) return;
+            
             if (proceedTimeInEditMode && !Application.isPlaying)
             {
-                playable.SetTime(playable.GetTime() + Time.deltaTime);
+                var newTime = playable.GetTime() + Time.deltaTime;
+                playable.SetTime(newTime);
             }
+
+            if (Loop && playable.GetTime() > Clip.length) playable.SetTime(0);
 
             mixer.SetInputWeight(index, Weight01);
             if (Additive) mixer.SetInputWeight(0, 1);

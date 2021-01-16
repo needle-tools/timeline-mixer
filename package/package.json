@@ -16,5 +16,12 @@
   ],
   "dependencies": {
     "com.unity.timeline": "1.4.2"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Getting Started",
+      "description": "Simple sample scene showing basic usage",
+      "path": "Samples~/Getting Started"
+    }
+  ]
 }

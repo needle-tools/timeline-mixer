@@ -3,7 +3,7 @@
 
 Timeline Mixer allows for blending between currently playing (or paused) timeline animation and other animations per animator.
 
-![](package/~Documentation/video1.gif)
+![](package/Documentation~/video1.gif)
 
 
 # How To Use
