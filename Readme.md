@@ -7,7 +7,11 @@ Timeline Mixer allows for blending between currently playing (or paused) timelin
 
 ## Installation 💾
 
-This package is available on OpenUPM (recommended): https://openupm.com/packages/com.needle.animation.timelinemixer/
+This package is available on OpenUPM (recommended): https://openupm.com/packages/com.needle.animation.timelinemixer/ 
+
+<a href="https://openupm.com/packages/com.needle.animation.timelinemixer/">
+  <img src="https://img.shields.io/npm/v/com.needle.animation.timelinemixer?label=openupm&amp;registry_uri=https://package.openupm.com" />
+</a>
 
 
 ## How To Use 💡
