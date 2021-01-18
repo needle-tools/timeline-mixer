@@ -1,0 +1,15 @@
+{
+    "name": "needle.animation.timelinemixer.gettingstarted",
+    "references": [
+        "GUID:d95206449ffc9494f86a534fda850669"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
