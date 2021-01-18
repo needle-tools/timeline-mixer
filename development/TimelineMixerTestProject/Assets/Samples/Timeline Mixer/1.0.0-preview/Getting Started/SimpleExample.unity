@@ -372,7 +372,7 @@ MonoBehaviour:
   _animator: {fileID: 1140060685}
   Clip: {fileID: 7400000, guid: 6bae0ca445fc3444fa70867a42695cc1, type: 2}
   Weight01: 0
-  Additive: 0
+  Additive: 1
   Loop: 1
   proceedTimeInEditMode: 1
 --- !u!23 &1140060682
