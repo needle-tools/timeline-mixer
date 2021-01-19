@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using Object = UnityEngine.Object;
 
 namespace needle.TimelineMixer
 {
@@ -14,16 +16,16 @@ namespace needle.TimelineMixer
 
         public bool AutoCollectMixerAtStart = true;
 
-        [SerializeField] private List<TimelineAnimationMixer> Mixer = default;
+        [SerializeField] private List<TimelineMixerBase> Mixer = default;
 
-        public void Add(TimelineAnimationMixer mixer)
+        public void Add(TimelineMixerBase mixer)
         {
             if (!mixer) return;
             if (Mixer.Contains(mixer)) return;
             Mixer.Add(mixer);
         }
 
-        public void Remove(TimelineAnimationMixer mixer)
+        public void Remove(TimelineMixerBase mixer)
         {
             if (!mixer) return;
             if (!Mixer.Contains(mixer)) return;
@@ -51,9 +53,15 @@ namespace needle.TimelineMixer
         public bool TimelineIsPlaying() => Director && Director.playableGraph.IsValid() && Director.playableGraph.IsPlaying();
 
         private int previousId;
-        private readonly List<TimelineAnimationMixer> previousMixers = new List<TimelineAnimationMixer>();
-        private readonly List<Animator> previousAnimators = new List<Animator>();
-        private readonly List<bool> previousStates = new List<bool>();
+
+        private class State
+        {
+            public Object instance;
+            public bool enabled;
+            public Animator animator;
+        }
+        
+        private readonly List<State> previousMixers = new List<State>();
 
         private readonly List<(TimelineAnimationMixer handler, AnimationLayerMixerPlayable playable)> injectedMixers =
             new List<(TimelineAnimationMixer, AnimationLayerMixerPlayable)>();
@@ -142,41 +150,39 @@ namespace needle.TimelineMixer
 
         private bool DetectMixersChanged()
         {
-            if(Mixer == null) Mixer = new List<TimelineAnimationMixer>();
+            if(Mixer == null) Mixer = new List<TimelineMixerBase>();
             var mixersChanged = Mixer.Count != previousMixers.Count;
-            for (var i = 0; i < Mixer.Count && i < previousMixers.Count; i++)
+            for (var i = 0; i < Mixer.Count; i++)
             {
+                if (i >= previousMixers.Count) previousMixers.Add(new State());
                 var current = Mixer[i];
                 var prev = previousMixers[i];
-                if (current != prev)
+                if (current != prev.instance)
+                {
+                    prev.instance = current;
                     mixersChanged = true;
+                }
                 if (current && current.RequestGraphRebuild)
                 {
                     mixersChanged = true;
                     current.RequestGraphRebuild = false;
                 }
-                else if (current && prev)
+                else if (current && prev.instance)
                 {
-                    var state = previousStates[i];
-                    if (current.Animator != prev.Animator)
+                    if (current is TimelineAnimationMixer ta && ta.Animator != prev.animator)
+                    {
+                        prev.animator = ta.Animator;
                         mixersChanged = true;
-                    else if (current.enabled != state)
+                    }
+                    
+                    if (current.enabled != prev.enabled)
+                    {
+                        prev.enabled = current.enabled;
                         mixersChanged = true;
+                    }
                 }
             }
-
             if (!mixersChanged) return false;
-
-            previousMixers.Clear();
-            previousAnimators.Clear();
-            previousStates.Clear();
-            foreach (var mix in Mixer)
-            {
-                previousMixers.Add(mix);
-                previousAnimators.Add(mix ? mix.Animator : null);
-                previousStates.Add(mix && mix.enabled);
-            }
-
             return true;
         }
 
@@ -196,19 +202,22 @@ namespace needle.TimelineMixer
             {
                 var mixer = Mixer[index];
                 if (!mixer || !mixer.enabled) continue;
-                var animator = mixer.Animator;
-                if (!animator)
-                    continue;
-                if (Director.TryInjectMixer(timelinePlayable, animator, out var mixerPlayable))
+                if (mixer is TimelineAnimationMixer animatorMixer)
                 {
-                    injectedMixers.Add((mixer, mixerPlayable));
-                    try
+                    var animator = animatorMixer.Animator;
+                    if (!animator)
+                        continue;
+                    if (Director.TryInjectMixer(timelinePlayable, animator, out var mixerPlayable))
                     {
-                        mixer.OnConnected(Director.playableGraph, mixerPlayable);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError(e);
+                        injectedMixers.Add((animatorMixer, mixerPlayable));
+                        try
+                        {
+                            animatorMixer.OnConnected(Director.playableGraph, mixerPlayable);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                        }
                     }
                 }
             }
