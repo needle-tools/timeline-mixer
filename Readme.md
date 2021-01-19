@@ -27,4 +27,4 @@ We have used TimelineMixer successfully shipping <a href="https://songsofculture
 <b>[🌵 needle — tools for unity](https://needle.tools)</b> • 
 [@NeedleTools](https://twitter.com/NeedleTools) • 
 [@marcel_wiessler](https://twitter.com/marcel_wiessler) • 
-[@hybridherbst](https://twitter.com/hybdridherbst)
+[@hybridherbst](https://twitter.com/hybridherbst)
