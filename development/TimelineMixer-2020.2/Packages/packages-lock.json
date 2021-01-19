@@ -8,6 +8,12 @@
         "com.unity.timeline": "1.4.2"
       }
     },
+    "com.needle.animation.timelinemixer.extra": {
+      "version": "file:../../timelinemixer.extra",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.3.9",
       "depth": 0,

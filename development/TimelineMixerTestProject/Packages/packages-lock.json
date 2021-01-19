@@ -8,8 +8,8 @@
         "com.unity.timeline": "1.4.2"
       }
     },
-    "com.needle.timeline-mixer.extra": {
-      "version": "file:../../com.needle.timeline-mixer.extra",
+    "com.needle.animation.timelinemixer.extra": {
+      "version": "file:../../timelinemixer.extra",
       "depth": 0,
       "source": "local",
       "dependencies": {}
