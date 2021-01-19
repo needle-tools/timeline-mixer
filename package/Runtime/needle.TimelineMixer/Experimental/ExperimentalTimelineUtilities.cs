@@ -10,16 +10,12 @@ namespace needle.TimelineMixer.Experimental
 	{
 		public static PlayableGraph GetGraph(PlayableDirector director, TimelineAsset asset)
 		{
-			var prev = director.playableAsset;
-			director.RebuildGraph();
-			var graph = director.playableGraph;
-			var o = new PlayableOutput();
-			// var myGraph = PlayableGraph.Create();
-			// var root = graph.GetRootPlayable(0);
-			// myGraph.Connect(root, 0, myGraph.GetRootPlayable(0), 0);
-			director.playableAsset = prev;
-			director.RebuildGraph();
-			return graph;
+			var myGraph = PlayableGraph.Create("Mix: " + asset.name);
+			foreach (var o in asset.GetOutputTracks())
+			{
+				asset.GetOutputTrack(0).CreatePlayable(myGraph, director.gameObject);
+			}
+			return myGraph;
 		}
 		
 		public static ScriptPlayable<TimelinePlayable> AddTimeline(this AnimationLayerMixerPlayable layerMixer, 
