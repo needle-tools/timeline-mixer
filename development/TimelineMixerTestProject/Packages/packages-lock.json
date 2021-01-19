@@ -39,11 +39,10 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.playablegraph-visualizer": {
-      "version": "0.2.1-preview.3",
+      "version": "file:../../com.unity.playablegraph-visualizer",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.test-framework": {
       "version": "1.1.19",
