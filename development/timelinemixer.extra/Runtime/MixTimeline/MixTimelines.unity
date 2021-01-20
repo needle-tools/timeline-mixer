@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 183025716}
   - component: {fileID: 183025715}
   - component: {fileID: 183025714}
+  - component: {fileID: 183025717}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -154,8 +155,7 @@ MonoBehaviour:
   Director: {fileID: 183025715}
   AutoCollectMixerAtStart: 1
   Mixer:
-  - {fileID: 1140060681}
-  - {fileID: 1677522901}
+  - {fileID: 183025717}
 --- !u!320 &183025715
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -201,6 +201,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &183025717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183025713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedd26c30a104de9ba1f72adc3f2d3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1140060685}
+  Director: {fileID: 183025715}
+  Asset: {fileID: 11400000, guid: aeddd4c925a3f3b4ea6389c571543352, type: 2}
+  Weight: 0.37
+  Duration: 3
 --- !u!1001 &344296797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,7 +379,6 @@ GameObject:
   - component: {fileID: 1140060683}
   - component: {fileID: 1140060682}
   - component: {fileID: 1140060685}
-  - component: {fileID: 1140060681}
   m_Layer: 0
   m_Name: Mixer
   m_TagString: Untagged
@@ -370,23 +386,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1140060681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140060680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cedd26c30a104de9ba1f72adc3f2d3f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1140060685}
-  Director: {fileID: 183025715}
-  Asset: {fileID: 11400000, guid: aeddd4c925a3f3b4ea6389c571543352, type: 2}
-  Weight: 1
-  Duration: 3
 --- !u!23 &1140060682
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -443,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 1140060680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 0.13795072, z: 1}
+  m_LocalScale: {x: 1, y: 0.4272642, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -480,7 +479,6 @@ GameObject:
   - component: {fileID: 1677522898}
   - component: {fileID: 1677522897}
   - component: {fileID: 1677522896}
-  - component: {fileID: 1677522901}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -577,28 +575,11 @@ Transform:
   m_GameObject: {fileID: 1677522895}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.18, y: 0.35702872, z: 0.16646981}
-  m_LocalScale: {x: 1, y: 0.11964726, z: 1}
+  m_LocalScale: {x: 1, y: 0.10916412, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1677522901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677522895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cedd26c30a104de9ba1f72adc3f2d3f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1677522896}
-  Director: {fileID: 183025715}
-  Asset: {fileID: 11400000, guid: aeddd4c925a3f3b4ea6389c571543352, type: 2}
-  Weight: 1
-  Duration: 3
 --- !u!1 &1913257039
 GameObject:
   m_ObjectHideFlags: 0
