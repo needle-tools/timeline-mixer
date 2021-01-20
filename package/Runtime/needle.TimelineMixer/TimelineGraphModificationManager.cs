@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
-using UnityEngine.Timeline;
 using Object = UnityEngine.Object;
 
 namespace needle.TimelineMixer
@@ -75,11 +73,16 @@ namespace needle.TimelineMixer
 
         private void Start()
         {
-            if(AutoCollectMixerAtStart) FindMixerInHierarchy();
+            if (AutoCollectMixerAtStart)
+            {
+                FindMixerInScene();
+            }
         }
 
         private void OnEnable()
         {
+            if (AutoCollectMixerAtStart && !Application.isPlaying && Application.isEditor)
+                FindMixerInScene();
             Inject();
         }
 
@@ -200,9 +203,9 @@ namespace needle.TimelineMixer
             injectedMixers.Clear();
             for (var index = 0; index < Mixer.Count; index++)
             {
-                var mixer = Mixer[index];
-                if (!mixer || !mixer.enabled) continue;
-                if (mixer is TimelineAnimationMixer animatorMixer)
+                var entry = Mixer[index];
+                if (!entry || !entry.enabled) continue;
+                if (entry is TimelineAnimationMixer animatorMixer)
                 {
                     var animator = animatorMixer.Animator;
                     if (!animator)
@@ -233,7 +236,14 @@ namespace needle.TimelineMixer
         [ContextMenu(nameof(FindMixerInHierarchy))]
         private void FindMixerInHierarchy()
         {
-            var mixers = GetComponentsInChildren<TimelineAnimationMixer>(true);
+            var mixers = GetComponentsInChildren<TimelineMixerBase>(true);
+            foreach (var mix in mixers) this.Add(mix);
+        }
+
+        [ContextMenu(nameof(FindMixerInScene))]
+        private void FindMixerInScene()
+        {
+            var mixers = FindObjectsOfType<TimelineMixerBase>();
             foreach (var mix in mixers) this.Add(mix);
         }
     }
