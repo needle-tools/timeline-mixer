@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Experimental.Animations;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
@@ -28,18 +29,30 @@ namespace needle.TimelineMixer.Experimental
 				index = -1;
 				return ScriptPlayable<TimelinePlayable>.Null;
 			}
+			
+			var tracks = asset.GetOutputTracks();
 
 			// AddPlayables(director, asset, out var playables);
 			//
-			// foreach (var (trackAsset, playable) in playables)
-			// {
-			// 	Debug.Log(trackAsset + " - " + trackAsset.duration + ", PlayableIsValid? " + playable.IsValid());
-			// 	// playable.SetDuration(trackAsset.duration);
-			// }
+			foreach (var trackAsset in tracks)
+			{
+				Debug.Log(trackAsset + " - " + trackAsset.duration);
+				// playable.SetDuration(trackAsset.duration);
+			}
+			foreach (var trackAsset in (director.playableAsset as TimelineAsset).GetOutputTracks())
+			{
+				Debug.Log(trackAsset + " - " + trackAsset.duration);
+				// playable.SetDuration(trackAsset.duration);
+			}
+
+			TimelineUtilities.TryFindTimelinePlayable(director.playableGraph, out var rootTimeline);
+			// var timelineOutput = rootTimeline.GetOutput(0);
+			// Debug.Log(rootTimeline.GetPlayableType() + ", " +  timelineOutput.IsValid());
+			// var mixer = AnimationMixerPlayable.Create(director.playableGraph, 1);
+			// mixer.ConnectInput(0, rootTimeline, 0);
+			// timelineOutput.DisconnectInput(0);
 			
-			var tracks = asset.GetOutputTracks();
 			var timelinePlayable = TimelinePlayable.Create(director.playableGraph, tracks, director.gameObject, autoBalance, true);
-			var mixer = AnimationMixerPlayable.Create(director.playableGraph, timelinePlayable.GetInputCount());
 			for (var i = 0; i < timelinePlayable.GetInputCount(); i++)
 			{
 				var input = timelinePlayable.GetInput(i);
@@ -48,9 +61,10 @@ namespace needle.TimelineMixer.Experimental
 				// mixer.AddInput(input, 0, 1);
 			}
 
-			mixer.AddInput(timelinePlayable, 0, 1);
+			// mixer.AddInput(timelinePlayable, 0, 1);
 
-			index = layerMixer.AddInput(mixer, 0);
+			// index = -1;
+			index = layerMixer.AddInput(timelinePlayable, 0);
 			return timelinePlayable;
 		}
 	}
