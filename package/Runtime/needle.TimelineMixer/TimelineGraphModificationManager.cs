@@ -87,6 +87,10 @@ namespace needle.TimelineMixer
         private void Update()
         {
             if (!Director || !Director.playableGraph.IsValid()) return;
+            
+#if UNITY_EDITOR
+            if (UnityEditor.AnimationMode.InAnimationMode()) return;
+#endif
 
             Inject();
             
